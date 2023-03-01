@@ -7,7 +7,8 @@ let userGuess = NaN;
 
 element.addEventListener("blur", function(){ 
 console.log(element.value)
-userGuess = element.value
+userGuess = parseInt(element.value);
+isGuessCorrect();
     
 });
 
@@ -20,8 +21,45 @@ function randNumber() {
 let number = randNumber();
 console.log(number);
 
+let hintContainer = document.getElementById('hint');
+
 //alert the user if they are too high or too low
 
+function isGuessCorrect() {
+    
+    if(number === userGuess)
+    {
+        //user wins
+        //change the background color if the user wins
 
 
-//change the background color if the user wins
+        document.body.style.backgroundColor = 'green'
+        createPara(`Correct!`)
+
+
+    }
+    else if(number > userGuess)
+    {
+        //userguess is too low
+        createPara(`Your guess of ${userGuess} is too low.`)
+
+    }
+    else
+    {
+        //userguess is too high
+        createPara(`Your guess of ${userGuess} is too high.`)
+
+    }
+
+}
+
+
+
+function createPara(text)
+{
+    const newPara = document.createElement('p');
+    const newContent = document.createTextNode(text);
+
+    newPara.appendChild(newContent);
+    hintContainer.appendChild(newPara);
+}
